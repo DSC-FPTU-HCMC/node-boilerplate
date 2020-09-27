@@ -29,6 +29,7 @@
     "await-to-js": "^2.1.1",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
+    "co": "^4.6.0",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.0",
     "express-json-views": "git+https://github.com/quangdatpham/express-json-views.git#development/render-nested-json-structure",
@@ -37,6 +38,8 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
+    "sequelize": "^6.3.5",
+    "tedious": "^9.2.1",
     "winston": "^3.2.1"
   },
   "devDependencies": {
