@@ -32,6 +32,7 @@ export JWT_SECRET=""
 export JWT_EXPIRES="60" # 60 minutes
 ```
 **STEP 3:** Create database named **book-team-available-time**
+
 Using SQL Server Management Studio
 ```sql
 CREATE DATABASE "book-team-available-time"
@@ -111,3 +112,39 @@ sequelize migration:generate                Generates a new migration file      
 sequelize model:generate                    Generates a model and its migration [aliases: model:create]
 sequelize seed:generate                     Generates a new seed file           [aliases: seed:create]
 ```
+
+
+### Sample use-case diagram
+**Feature: Book available time - set available first**
+- Actor - in the landing page
+- Click create timetable
+- Redirect to create-timetable page
+- Inside create-timetable page
+    - Choose timetable (day, week, month)
+    - Choose day
+        - If the day has been chosen for the other timetable
+            - Yes -> Override
+            - No -> Back to create-timetable page
+        - If the day include in working day
+            - Check the priority
+                - High -> Ask before create
+                - Medium -> Ask before create
+                - Low -> Proceed to create
+        - If the day include in holidays
+            - Ask before create
+                - Yes -> Recommend for activities
+                - No
+    - Go inside custom timetable and get permalink
+        - Copy permalink and share with friend
+        - Invite via emails
+    - Everyone choose their available time
+        - If many people choose their available in a specific time, Ask you to pick the same
+            - Yes -> Add available time to timetable
+            - No
+        - Check if user has choose a specific time multiple time
+            - Yes -> Add available time to timetable
+            - No
+        - Self-custom available time
+    - Set the event day
+    - Email the email has been set
+    - . . .
