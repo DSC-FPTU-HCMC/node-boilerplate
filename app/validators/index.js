@@ -1,5 +1,7 @@
-const loginValidator = require('./login.validator');
+const signInValidator = require('./signin.validator');
+const timetableValidator = require('./timetable.validator');
 
 module.exports = {
-  loginValidator
+  signInValidator,
+  timetableValidator
 };

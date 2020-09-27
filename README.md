@@ -7,6 +7,11 @@ Book and share your available time with your friends.
   - [Using sequelize-cli](https://github.com/sequelize/cli)
 
 ## Installation
+Before running the installation commands make sure you already installed:
+- [node](https://nodejs.org/en/download/)
+- [sequelize-cli](https://github.com/sequelize/cli)
+- [mssql](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+
 **STEP 1:** Install node dependencies
 ```bash
 npm install
@@ -56,6 +61,7 @@ npm run dev
 ```bash
 # CREATE THE DATABASE MODEL
 sequelize model:generate --name Timetable --attributes name:string,description:string
+#
 # After creating the model, `timetable.js` and `*-create-time-table.js` will be generated.
 # Then get the output from source code explorer
 # ./database
@@ -65,8 +71,11 @@ sequelize model:generate --name Timetable --attributes name:string,description:s
 # │   └── 20200927031300-create-timetable.js
 # └── seeds
 
+# RENMAE THE `timetable.js` TO `timetable.model.js` AS OUR NAMING CONVENTION
+
 # RUN MIGRATION TO UPDATE THE DATABASE
 sequelize db:migrate
+#
 # Checkout the database via your favorite database management studio then you will see the table named `TimeTables` has been created.
 # Then get the ouput from command line
 # == 20200927031300-create-timetable: migrating =======
@@ -80,6 +89,7 @@ sequelize db:migrate
 
 # GENERATE NEW MIGRATION
 sequelize migration:generate --name add-place-to-timetable
+#
 # Then a new migration file named `*-add-place-to-timetable.js` will be created
 
 # EDIT THE MIGRATION FILE `*-add-place-to-timetable.js`

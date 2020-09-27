@@ -3,12 +3,13 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
-const { Sequelize } = require('sequelize');
 const co = require('co');
+const { errors } = require('celebrate');
 
 const apiRoute = require('./app/routes/');
 const { requestMiddleware } = require('./app/middlewares/');
-const { logger, databaseConfig } = require('./configs');
+const { logger } = require('./configs/');
+const sequelize = require('./database/');
 
 let morganFormat = ':method :url :status :res[content-length] - :response-time ms';
 if (process.env.NODE_ENV === 'production')
@@ -24,7 +25,6 @@ process.on('uncaughtRejection', (err, promise) => {
 
 co(function* () {
   const app = express();
-  const sequelize = new Sequelize(databaseConfig[process.env.NODE_ENV]);
 
   yield sequelize.authenticate();
   logger.info('Database connected!');
@@ -45,8 +45,8 @@ co(function* () {
   app.use(requestMiddleware.wirePreRequest);
   app.get('/', (req, res) => res.send('<h1>Developer Students Club - FPT University HCMC</h1>'));
   app.use('/api/', apiRoute);
-
   app.use(requestMiddleware.wirePostRequest);
+
   app.listen(process.env.PORT, () => {
     logger.info(`Server is now listening on PORT: ${process.env.PORT}`);
     logger.info(`Link: http://localhost:${process.env.PORT}`);
