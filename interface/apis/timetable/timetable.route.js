@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const timetableController = require('./timetable.controller');
-const timetableValidator = require('./timetable.validator');
+const timetableController = global['interface.apis.timetable.timetableController'];
+const timetableValidator = global['interface.apis.timetable.timetableValidator'];
 
 router.get('/', timetableController.findAll);
 
@@ -10,4 +10,7 @@ router.get('/:id', timetableController.findById);
 
 router.post('/', timetableValidator, timetableController.create);
 
-module.exports = router;
+global.setGlobalVariable(
+  'interface.apis.authentication.timetableRoute',
+  router
+);

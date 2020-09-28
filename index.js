@@ -1,10 +1,16 @@
+global.setGlobalVariable = (identifier, value) => {
+  if (Object.hasOwnProperty(global, identifier))
+    throw Error (`global already has a value associate with the identifier ${identifier}`);
+  console.log(value);
+  global[identifier] = Object.create(value);
+}
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const co = require('co');
-const { errors } = require('celebrate');
 
 const apiRoute = require('./interface/apis/root/root.route');
 const requestMiddleware = require('./interface/apis/request/request.middleware');

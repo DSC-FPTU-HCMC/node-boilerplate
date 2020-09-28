@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-const authRoute = require('../authentication/auth.route');
-const timetableRoute = require('../timetable/timetable.route');
+const authRoute = global['interface.apis.authentication.authRoute'];
+const timetableRoute = global['interface.apis.timetable.timetableRoute']
 
 router.use('/auth', authRoute);
 
 router.use('/timetables', timetableRoute);
 
-module.exports = router;
+global.setGlobalVariable(
+  'interface.apis.root.rootRoute',
+  router
+);

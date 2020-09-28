@@ -2,7 +2,9 @@ const jwt = require('jsonwebtoken');
 const { to } = require('await-to-js');
 const status = require('http-status');
 
-const requireAuth = async (req, res, next) => {
+const authMiddleware = {};
+
+authMiddleware.requireAuth = async (req, res, next) => {
   let token = req.cookies.token;
 
   if (!token) {
@@ -18,7 +20,7 @@ const requireAuth = async (req, res, next) => {
   });
 };
 
-const requireRole = roles => async (req, res, next) => {
+authMiddleware.requireRole = roles => async (req, res, next) => {
   const { Account } = req.repos;
   let accountRoles;
   if (!req.user) {
@@ -37,7 +39,7 @@ const requireRole = roles => async (req, res, next) => {
   });
 };
 
-module.exports = {
-  requireAuth,
-  requireRole
-}
+global.setGlobalVariable(
+  'interface.apis.authentication.authMiddleware',
+  authMiddleware
+);

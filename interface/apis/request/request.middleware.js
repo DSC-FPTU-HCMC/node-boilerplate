@@ -1,12 +1,15 @@
 const status = require('http-status');
+const { request } = require('express');
 
-const wirePreRequest = (req, res, next) => {
+const requestMiddleware = {};
+
+requestMiddleware.wirePreRequest = (req, res, next) => {
   const logger = req.logger;
   logger.info(`Handle ${req.method} request <---- ${req.url}`);
   next();
 };
 
-const wirePostRequest = (err, req, res, next) => {
+requestMiddleware.wirePostRequest = (err, req, res, next) => {
   const logger = req.logger;
   if (!err) return next();
 
@@ -33,7 +36,7 @@ const wirePostRequest = (err, req, res, next) => {
   });
 }
 
-module.exports = {
-  wirePostRequest,
-  wirePreRequest
-}
+global.setGlobalMiddleware(
+  'interface.apis.request.requestMiddleware',
+  requestMiddleware
+);

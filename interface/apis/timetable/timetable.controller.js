@@ -1,12 +1,14 @@
-const timetableService = require('../../../core/application-services/timetable/timetable.service');
+const timetableService = global['core.application-services.timetableService'];
 const httpStatus = require('http-status');
 
-module.exports.findAll = async (req, res) => {
+const timetableController = {};
+
+timetableController.findAll = async (req, res) => {
   const timetables = await timetableService.findAll();
   res.send(timetables);
 }
 
-module.exports.findById = async (req, res) => {
+timetableController.findById = async (req, res) => {
   const timetable = await timetableService.findById(req.params.id);
   if (!timetable)
     return res.status(httpStatus.NOT_FOUND).send({
@@ -16,7 +18,12 @@ module.exports.findById = async (req, res) => {
   res.send(timetable);
 }
 
-module.exports.create = async (req, res) => {
+timetableController.create = async (req, res) => {
   const timetable = await timetableService.create(req.body);
   res.send(timetable);
 }
+
+global.setGlobalVariable(
+  'interface.apis.authentication.timetableController',
+  timetableController
+);

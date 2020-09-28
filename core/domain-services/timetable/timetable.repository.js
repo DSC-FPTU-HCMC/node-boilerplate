@@ -1,13 +1,20 @@
 const { Timetable } = require('../../../database').models;
 
-module.exports.findAll = async () => {
+const timetableRepository = {};
+
+timetableRepository.findAll = async () => {
   return Timetable.findAll();
 }
 
-module.exports.findById = async id => {
+timetableRepository.findById = async id => {
   return Timetable.findByPk(id);
 }
 
-module.exports.create = async timetable => {
+timetableRepository.create = async timetable => {
   return Timetable.create(timetable);
 }
+
+global.setGlobalVariable(
+  'core.domain-services.timetableRepository',
+  timetableRepository
+);

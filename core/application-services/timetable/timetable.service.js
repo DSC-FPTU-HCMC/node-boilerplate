@@ -1,13 +1,20 @@
-const timetableRepository = require('../../domain-services/timetable/timetable.repository');
+const timetableRepository = global['core.domain-services.timetableRepository'];
 
-module.exports.findAll = async () => {
+const timetableService = {};
+
+timetableService.findAll = async () => {
   return timetableRepository.findAll();
 }
 
-module.exports.findById = async id => {
+timetableService.findById = async id => {
   return timetableRepository.findById(id);
 }
 
-module.exports.create = async timetable => {
+timetableService.create = async timetable => {
   return timetableRepository.create(timetable);
 }
+
+global.setGlobalVariable(
+  'core.application-services.timetableRepository',
+  timetableService
+);
