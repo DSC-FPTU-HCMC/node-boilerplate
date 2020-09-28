@@ -1,4 +1,4 @@
-const timetableRepository = require('../../domain-services/timetable/timetable.repository');
+const timetableRepository = rootRequire('/core/domain-services/timetable/timetable.repository');
 
 module.exports.findAll = async () => {
   return timetableRepository.findAll();

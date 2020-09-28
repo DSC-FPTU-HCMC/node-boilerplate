@@ -1,3 +1,6 @@
+
+global.rootRequire = module => require(__dirname + module);
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
@@ -6,10 +9,10 @@ const cookieParser = require('cookie-parser');
 const co = require('co');
 const { errors } = require('celebrate');
 
-const apiRoute = require('./interface/apis/root/root.route');
-const requestMiddleware = require('./interface/apis/request/request.middleware');
-const { logger } = require('./configs/');
-const sequelize = require('./database/');
+const apiRoute = rootRequire('/interface/apis/root/root.route');
+const requestMiddleware = rootRequire('/interface/apis/request/request.middleware');
+const { logger } = rootRequire('/configs/');
+const sequelize = rootRequire('/database/');
 
 let morganFormat = ':method :url :status :res[content-length] - :response-time ms';
 if (process.env.NODE_ENV === 'production')

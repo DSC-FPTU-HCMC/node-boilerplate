@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const { to } = require('await-to-js');
 const status = require('http-status');
 
-const requireAuth = async (req, res, next) => {
+module.exports.requireAuth = async (req, res, next) => {
   let token = req.cookies.token;
 
   if (!token) {
@@ -18,7 +18,7 @@ const requireAuth = async (req, res, next) => {
   });
 };
 
-const requireRole = roles => async (req, res, next) => {
+module.exports.requireRole = roles => async (req, res, next) => {
   const { Account } = req.repos;
   let accountRoles;
   if (!req.user) {
@@ -36,8 +36,3 @@ const requireRole = roles => async (req, res, next) => {
     message: 'You do not have permission to access this resource'
   });
 };
-
-module.exports = {
-  requireAuth,
-  requireRole
-}

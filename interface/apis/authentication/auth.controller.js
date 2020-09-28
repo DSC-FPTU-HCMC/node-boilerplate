@@ -5,7 +5,7 @@ const { to } = require('await-to-js');
 const jwt = require('jsonwebtoken');
 const status = require('http-status');
 
-const postSignIn = async (req, res, next) => {
+module.exports.postSignIn = async (req, res, next) => {
   const { Account } = req.repos;
   const { username, password } = req.body;
 
@@ -47,7 +47,7 @@ const postSignIn = async (req, res, next) => {
   }
 }
 
-const postSignUp = async (req, res, next) => {
+module.exports.postSignUp = async (req, res, next) => {
   const { Account } = req.repos;
   const { username, password } = req.body;
 
@@ -78,8 +78,3 @@ const generateJWT = ({ _id, username }) => {
     expiresIn: parseInt(process.env.JWT_EXPIRES)
   });
 };
-
-module.exports = {
-  postSignIn,
-  postSignUp
-}
