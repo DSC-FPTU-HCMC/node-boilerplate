@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const { timetableController } = require('../controllers/');
-const { timetableValidator } = require('../validators/');
+const timetableController = require('./timetable.controller');
+const timetableValidator = require('./timetable.validator');
 
 router.get('/', timetableController.findAll);
 

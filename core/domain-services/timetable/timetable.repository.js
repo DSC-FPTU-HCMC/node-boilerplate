@@ -1,4 +1,4 @@
-const { Timetable } = require('../../database').models;
+const { Timetable } = require('../../../database').models;
 
 module.exports.findAll = async () => {
   return Timetable.findAll();

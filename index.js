@@ -6,8 +6,8 @@ const cookieParser = require('cookie-parser');
 const co = require('co');
 const { errors } = require('celebrate');
 
-const apiRoute = require('./app/routes/');
-const { requestMiddleware } = require('./app/middlewares/');
+const apiRoute = require('./interface/apis/root/root.route');
+const requestMiddleware = require('./interface/apis/request/request.middleware');
 const { logger } = require('./configs/');
 const sequelize = require('./database/');
 

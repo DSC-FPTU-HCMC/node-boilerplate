@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const authRoute = require('./auth.route');
-const timetableRoute = require('./timetable.route');
+const authRoute = require('../authentication/auth.route');
+const timetableRoute = require('../timetable/timetable.route');
 
 router.use('/auth', authRoute);
 
