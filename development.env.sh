@@ -6,11 +6,11 @@ export SSL=""
 
 # database
 # export DB_NAME="book-team-available-time"
-# export DB_USERNAME="sa"
+# export DB_USERNAME="root"
 # export DB_PASSWORD="root@1234"
-# export DB_HOST="127.0.0.1"
-# export DB_PORT="1433"
-# export DB_DIALECT="mssql"
+# export DB_HOST="localhost"
+# export DB_PORT="3306"
+# export DB_DIALECT="mysql"
 
 # email
 export EMAIL_API_KEY=""

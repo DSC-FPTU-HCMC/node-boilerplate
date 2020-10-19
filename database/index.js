@@ -4,6 +4,8 @@ const { databaseConfig } = require('../configs/');
 
 const sequelize = new Sequelize(databaseConfig[process.env.NODE_ENV]);
 
+sequelize.sync({ logging: console.log })
+
 const modelDefiners = [
 	require('./models/timetable.model')
 ];

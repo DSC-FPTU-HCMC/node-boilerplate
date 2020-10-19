@@ -1,13 +1,13 @@
-const fs = require('fs');
+// const fs = require('fs');
 
 module.exports = {
   development: {
-    username: 'sa',
-    password: 'root@1234',
-    database: 'book-team-available-time',
-    host: 'localhost',
-    port: '1433',
-    dialect: 'mssql',
+    username: process.env.DB_USERNAME || 'root',
+    password: process.env.DB_PASSWORD || 'root@1234',
+    database: process.env.DB_NAME || 'book-team-available-time',
+    host: process.env.DB_HOST || 'localhost',
+    port: process.env.DB_PORT || '3306',
+    dialect: process.env.DB_DIALECT || 'mysql',
     dialectOptions: {
       bigNumberStrings: true
     }

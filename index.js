@@ -7,7 +7,6 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const co = require('co');
-const { errors } = require('celebrate');
 
 const apiRoute = rootRequire('/interface/apis/root/root.route');
 const requestMiddleware = rootRequire('/interface/apis/request/request.middleware');
