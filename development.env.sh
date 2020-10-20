@@ -5,12 +5,12 @@ export PORT="3000"
 export SSL=""
 
 # database
-# export DB_NAME="book-team-available-time"
-# export DB_USERNAME="root"
-# export DB_PASSWORD="root@1234"
-# export DB_HOST="localhost"
-# export DB_PORT="3306"
-# export DB_DIALECT="mysql"
+export DB_NAME="book-team-available-time"
+export DB_USERNAME="root"
+export DB_PASSWORD="root@1234"
+export DB_HOST="34.72.74.197"
+export DB_PORT="3306"
+export DB_DIALECT="mysql"
 
 # email
 export EMAIL_API_KEY=""

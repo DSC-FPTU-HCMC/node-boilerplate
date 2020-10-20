@@ -1,13 +1,13 @@
 const status = require('http-status');
 
-const wirePreRequest = (req, res, next) => {
-  const logger = req.logger;
+const { logger } = rootRequire('/externals/logger/');
+
+module.exports.wirePreRequest = (req, res, next) => {
   logger.info(`Handle ${req.method} request <---- ${req.url}`);
   next();
 };
 
-const wirePostRequest = (err, req, res, next) => {
-  const logger = req.logger;
+module.exports.wirePostRequest = (err, req, res, next) => {
   if (!err) return next();
 
   if (err && err.error && err.error.isJoi) {
@@ -31,9 +31,4 @@ const wirePostRequest = (err, req, res, next) => {
       stack: err.stack
     }
   });
-}
-
-module.exports = {
-  wirePostRequest,
-  wirePreRequest
 }

@@ -8,10 +8,9 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const co = require('co');
 
-const apiRoute = rootRequire('/interface/apis/root/root.route');
-const requestMiddleware = rootRequire('/interface/apis/request/request.middleware');
-const { logger } = rootRequire('/configs/');
-const sequelize = rootRequire('/database/');
+const { requestMiddleware, apiRootRoute } = rootRequire('/externals/interface/');
+const { sequelize } = rootRequire('/externals/database/');
+const { logger } = rootRequire('/externals/logger/');
 
 let morganFormat = ':method :url :status :res[content-length] - :response-time ms';
 if (process.env.NODE_ENV === 'production')
@@ -32,8 +31,6 @@ co(function* () {
   logger.info('Database connected!');
 
   app.use((req, res, next) => {
-    // req.db = db;
-    req.logger = logger;
     next();
   })
 
@@ -46,7 +43,7 @@ co(function* () {
   
   app.use(requestMiddleware.wirePreRequest);
   app.get('/', (req, res) => res.send('<h1>Developer Students Club - FPT University HCMC</h1>'));
-  app.use('/api/', apiRoute);
+  app.use('/api/', apiRootRoute);
   app.use(requestMiddleware.wirePostRequest);
 
   app.listen(process.env.PORT, () => {

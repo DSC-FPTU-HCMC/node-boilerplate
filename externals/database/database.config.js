@@ -1,6 +1,7 @@
 // const fs = require('fs');
+const { Sequelize } = require('sequelize');
 
-module.exports = {
+const databaseConfig = {
   development: {
     username: process.env.DB_USERNAME || 'root',
     password: process.env.DB_PASSWORD || 'root@1234',
@@ -38,3 +39,16 @@ module.exports = {
     }
   }
 };
+
+const sequelize = new Sequelize(databaseConfig[process.env.NODE_ENV]);
+sequelize.sync({ logging: console.log })
+
+const modelDefiners = [
+	require('./models/timetable.model')
+];
+
+for (const modelDefiner of modelDefiners) {
+	modelDefiner(sequelize);
+}
+
+module.exports = sequelize;

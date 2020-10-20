@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
 
-const timetableService = rootRequire('/core/application-services/timetable/timetable.service');
+const { timetableService } = rootRequire('/core/application-services/');
 
 module.exports.findAll = async (req, res) => {
   const timetables = await timetableService.findAll();

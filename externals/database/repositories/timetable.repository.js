@@ -1,4 +1,4 @@
-const { Timetable } = rootRequire('/database').models;
+const { Timetable } = rootRequire('/externals/database').sequelize.models;
 
 module.exports.findAll = async () => {
   return Timetable.findAll();
