@@ -1,38 +1,31 @@
-const jwt = require('jsonwebtoken');
-const { to } = require('await-to-js');
 const status = require('http-status');
 
+const {
+  TOKEN_REQUIRED,
+  TOKEN_INVALID,
+  FORBIDDEN
+} = rootRequire('/core/constants/');
+
+const { authService, userService } = rootRequire('/core/services/');
+
 module.exports.requireAuth = async (req, res, next) => {
-  let token = req.cookies.token;
+  const token = req.cookies.token;
+  if (!token)
+    return res.end({ message: TOKEN_REQUIRED });
 
-  if (!token) {
-    return res.redirect('/login');
-  }
+  const result = await authService.verifyToken({ token });
+  if (result.message === TOKEN_INVALID) 
+    return res.end(result);
 
-  jwt.verify(token, process.env.JWT_SECRET, async (err, decodedPayload) => {
-    if (err)
-      return res.redirect('/login');
-
-    req.user = await req.repos.Account.findById({ _id: decodedPayload._id });
-    next();
-  });
+  req.user = result.data.user;
+  next();
 };
 
-module.exports.requireRole = roles => async (req, res, next) => {
-  const { Account } = req.repos;
-  let accountRoles;
-  if (!req.user) {
-    [ err, accountRoles ] = await to(Account.findRolesById({ _id: req.user._id }));
-    if (err) return next(err);
-  } else {
-    accountRoles = req.user.roles;
-  }
+module.exports.requireRole = requiredRoles => async (req, res, next) => {
+  const result = await userService.checkRequiredRole({ id: req.user.id, requiredRoles });
 
-  if (roles.some(role => accountRoles.includes(role)))
-    return next();
+  if (result.message === FORBIDDEN)
+    return res.status(status.FORBIDDEN).send(result);
 
-  res.status(status.FORBIDDEN).send({
-    success: false,
-    message: 'You do not have permission to access this resource'
-  });
+  next();
 };

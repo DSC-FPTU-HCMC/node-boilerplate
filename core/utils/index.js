@@ -1,0 +1,1 @@
+module.exports.signJWT = require('./sign-jwt.util');

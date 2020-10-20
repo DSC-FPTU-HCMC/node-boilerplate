@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
 
-const { timetableService } = rootRequire('/core/application-services/');
+const { timetableService } = rootRequire('/core/services/');
 
 module.exports.findAll = async (req, res) => {
   const timetables = await timetableService.findAll();
@@ -8,7 +8,7 @@ module.exports.findAll = async (req, res) => {
 }
 
 module.exports.findById = async (req, res) => {
-  const timetable = await timetableService.findById(req.params.id);
+  const timetable = await timetableService.findById({ id: req.params.id });
   if (!timetable)
     return res.status(httpStatus.NOT_FOUND).send({
       message: 'NOT_FOUND'
