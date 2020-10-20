@@ -16,6 +16,7 @@ let morganFormat = ':method :url :status :res[content-length] - :response-time m
 if (process.env.NODE_ENV === 'production')
   morganFormat = 'combined';
 
+/* eslint-disable */
 process.on('uncaughtException', err => {
   console.error('Unhandled Exception', err);
 });
@@ -23,6 +24,7 @@ process.on('uncaughtException', err => {
 process.on('uncaughtRejection', (err, promise) => {
   console.error('Unhandled Rejection', err);
 });
+/* eslint-enable */
 
 co(function* () {
   const app = express();

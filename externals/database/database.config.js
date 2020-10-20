@@ -41,6 +41,7 @@ const databaseConfig = {
 };
 
 const sequelize = new Sequelize(databaseConfig[process.env.NODE_ENV]);
+// eslint-disable-next-line no-console
 sequelize.sync({ logging: console.log })
 
 const modelDefiners = [

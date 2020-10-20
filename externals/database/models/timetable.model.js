@@ -11,7 +11,8 @@ module.exports = sequelize => {
     static associate(models) {
       // define association here
     }
-  };
+  }
+
   Timetable.init({
     name: DataTypes.STRING,
     description: DataTypes.STRING,
@@ -20,5 +21,6 @@ module.exports = sequelize => {
     sequelize,
     modelName: 'Timetable',
   });
+
   return Timetable;
 };
