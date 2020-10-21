@@ -2,7 +2,8 @@ const status = require('http-status');
 
 const {
   VALIDATION_FAILED,
-  SERVER_ERROR
+  SERVER_ERROR,
+  FILE_UPLOAD_INVALID_MIMETYPE
 } = rootRequire('/core/constants');
 
 const { logger } = rootRequire('/externals/logger/');
@@ -28,6 +29,11 @@ module.exports.wirePostRequest = (err, req, res, next) => {
   if (err.code === 'LIMIT_UNEXPECTED_FILE')
     logger.error(`This is the invalid field -> ${err.field}`);
   logger.error(err.stack);
+
+  if (err.message.includes('FILE_UPLOAD: mimetype'))
+    return res.status(status.OK).send({
+      message: FILE_UPLOAD_INVALID_MIMETYPE
+    });
 
   res.status(status.OK).send({
     message: SERVER_ERROR,
