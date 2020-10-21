@@ -1,5 +1,10 @@
 const status = require('http-status');
 
+const {
+  VALIDATION_FAILED,
+  SERVER_ERROR
+} = rootRequire('/core/constants');
+
 const { logger } = rootRequire('/externals/logger/');
 
 module.exports.wirePreRequest = (req, res, next) => {
@@ -11,21 +16,21 @@ module.exports.wirePostRequest = (err, req, res, next) => {
   if (!err) return next();
 
   if (err && err.error && err.error.isJoi) {
-    return res.status(200).send({
-      message: 'ValidationError',
+    return res.status(status.OK).send({
+      message: VALIDATION_FAILED,
       type: err.type,
       error: err.error,
       fields: err.error.details.map(d => d.context.label)
     });
   }
 
-  logger.error(`ERROR :{} ${status.BAD_GATEWAY} ${err.message}`);
+  logger.error(`ERROR :{} ${err.message}`);
+  if (err.code === 'LIMIT_UNEXPECTED_FILE')
+    logger.error(`This is the invalid field -> ${err.field}`);
   logger.error(err.stack);
 
-  res.status(status.BAD_GATEWAY).send({
-    success: false,
-    status: status.BAD_GATEWAY,
-    message: err.message,
+  res.status(status.OK).send({
+    message: SERVER_ERROR,
     error: {
       message: err.message,
       stack: err.stack

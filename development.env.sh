@@ -30,3 +30,8 @@ export UPLOAD_PATH=""
 # jwt
 export JWT_SECRET="FJDKAOFJDKOQKFDKFKDJAFLOWJFLDJSOFWJFK"
 export JWT_EXPIRES="60" # 60 minutes
+
+# Google Cloud Platform
+export GCLOUD_STORAGE_BUCKET="time-bucket"
+export GOOGLE_CLOUD_PROJECT="book-team-available-time"
+export GOOGLE_APPLICATION_CREDENTIALS="google-application-credentials.json"

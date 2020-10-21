@@ -28,3 +28,6 @@
 
 # env
 # **.env.sh
+
+# Google Cloud Platform
+google-application-credentials.json

@@ -1,3 +1,4 @@
 module.exports = {
-    ...require('./auth.constant')
+  ...require('./auth.constant'),
+  ...require('./common.constant')
 }

@@ -1,3 +1,14 @@
+/* eslint-disable */
+process.on('uncaughtException', err => {
+  console.error((new Date).toUTCString() + ' uncaughtException:', err.message); // Displays the Date and Error Message.
+  console.log(err); // Displays the Error;
+  console.error(err.stack);  // Stack in Which the error occurred.
+});
+
+process.on('uncaughtRejection', (err, promise) => {
+  console.error('Unhandled Rejection', err);
+});
+/* eslint-enable */
 
 global.rootRequire = module => require(__dirname + module);
 
@@ -15,16 +26,6 @@ const { logger } = rootRequire('/externals/logger/');
 let morganFormat = ':method :url :status :res[content-length] - :response-time ms';
 if (process.env.NODE_ENV === 'production')
   morganFormat = 'combined';
-
-/* eslint-disable */
-process.on('uncaughtException', err => {
-  console.error('Unhandled Exception', err);
-});
-
-process.on('uncaughtRejection', (err, promise) => {
-  console.error('Unhandled Rejection', err);
-});
-/* eslint-enable */
 
 co(function* () {
   const app = express();
