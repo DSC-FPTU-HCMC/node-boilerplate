@@ -1,0 +1,1 @@
+module.exports.registerWebsocket = require('./register.websocket');

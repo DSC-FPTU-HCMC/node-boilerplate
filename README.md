@@ -158,3 +158,12 @@ sequelize seed:generate                     Generates a new seed file           
     - Set the event day
     - Email the email has been set
     - . . .
+
+## TODO
+[ ] Integrate Google Analytics.
+[ ] Enable Google Cloud Endpoints API management.
+[ ] Implement memcache
+[ ] Implement Email - Mailjet/SendGrid
+[ ] Implement SMS - Twillo
+[ ] Implement websockets
+[ ] Write Unit Test

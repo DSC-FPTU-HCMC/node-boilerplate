@@ -6,7 +6,7 @@ const {
   SIGNED_IN,
   DATABASE_DOWN
 } = rootRequire('/core/constants/auth.constant');
-const { signJWT } = rootRequire('/core/utils');
+const { authService } = rootRequire('/core/services/');
 
 const { userRepository } = rootRequire('/externals/database');
 const { logger } = rootRequire('/externals/logger');
@@ -28,7 +28,7 @@ module.exports = async ({ username, password }) => {
           username: user.username,
           email: user.email
         },
-        token: signJWT(user)
+        token: authService.signJWT(user)
       }
     };
   } catch (err) {

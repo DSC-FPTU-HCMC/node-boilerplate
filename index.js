@@ -18,10 +18,12 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const co = require('co');
+const http = require('http');
 
 const { requestMiddleware, apiRootRoute } = rootRequire('/externals/interface/');
 const { sequelize } = rootRequire('/externals/database/');
 const { logger } = rootRequire('/externals/logger/');
+const { registerWebsocket } = rootRequire('/externals/websocket/');
 
 let morganFormat = ':method :url :status :res[content-length] - :response-time ms';
 if (process.env.NODE_ENV === 'production')
@@ -29,6 +31,8 @@ if (process.env.NODE_ENV === 'production')
 
 co(function* () {
   const app = express();
+  const server = http.Server(app);
+  registerWebsocket(server);
 
   yield sequelize.authenticate();
   logger.info('Database connected!');
