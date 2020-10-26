@@ -3,7 +3,7 @@ const {
   TOKEN_INVALID
 } = rootRequire('/core/constants/');
 
-module.exports = server => {
+module.exports.registerWebsocket = server => {
   const io = require('socket.io')(server);
 
   // io.use((socket, next) => {
@@ -12,11 +12,11 @@ module.exports = server => {
 
   io.on('connection', async socket => {
     const authorizationHeader = socket.handshake.headers['Authorization'].split('Bearer ')[1];
-    const token = authorizationHeader && authorizationHeader.split('Bearer ')[1];
-    if (!authorizationHeader || !token)
+    const accessToken = authorizationHeader && authorizationHeader.split('Bearer ')[1];
+    if (!accessToken)
       return socket.disconnect(true);
 
-    const result = await authService.verifyToken({ token });
+    const result = await authService.verifyToken({ accessToken });
     if (result.message === TOKEN_INVALID)
       return socket.disconnect(true);
 

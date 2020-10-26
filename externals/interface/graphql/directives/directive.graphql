@@ -1,0 +1,2 @@
+directive @requireAuth on FIELD_DEFINITION
+directive @requireRoleAdmin on FIELD_DEFINITION

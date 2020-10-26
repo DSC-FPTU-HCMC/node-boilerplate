@@ -1,0 +1,18 @@
+type Query {
+  findTimetables: [Timetable]
+  findTimetableById(id: String!): Timetable 
+}
+
+type Mutation {
+  createTimetable(
+    name: String!,
+    description: String,
+    place: String
+  ): Timetable
+}
+
+type Timetable {
+  name: String
+  description: String
+  place: String
+}
