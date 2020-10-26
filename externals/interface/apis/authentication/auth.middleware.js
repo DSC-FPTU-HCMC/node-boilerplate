@@ -9,12 +9,12 @@ const {
 const { authService, userService } = rootRequire('/core/services/');
 
 module.exports.requireAuth = async (req, res, next) => {
-  const authorizationHeader = req.cookies.headers['Authorization'];
-  const token = authorizationHeader && authorizationHeader.split('Bearer ')[1];
-  if (!authorizationHeader || !token)
+  const authorizationHeader = req.headers['Authorization'];
+  const accessToken = authorizationHeader && authorizationHeader.split('Bearer ')[1];
+  if (!accessToken)
     return res.end({ message: TOKEN_REQUIRED });
 
-  const result = await authService.verifyToken({ token });
+  const result = await authService.verifyToken({ accessToken });
   if (result.message === TOKEN_INVALID) 
     return res.end(result);
 

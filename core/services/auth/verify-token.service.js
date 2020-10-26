@@ -7,8 +7,8 @@ const {
 
 const { userRepository } = rootRequire('/externals/database/');
 
-module.exports = ({ token }) => new Promise((resolve) => {
-  jwt.verify(token, process.env.JWT_SECRET, async (err, decodedPayload) => {
+module.exports = ({ accessToken }) => new Promise((resolve) => {
+  jwt.verify(accessToken, process.env.JWT_SECRET, async (err, decodedPayload) => {
     if (err)
       resolve({ message: TOKEN_INVALID });
 

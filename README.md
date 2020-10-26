@@ -160,10 +160,13 @@ sequelize seed:generate                     Generates a new seed file           
     - . . .
 
 ## TODO
-[ ] Integrate Google Analytics.
-[ ] Enable Google Cloud Endpoints API management.
-[ ] Implement memcache
-[ ] Implement Email - Mailjet/SendGrid
-[ ] Implement SMS - Twillo
-[ ] Implement websockets
-[ ] Write Unit Test
+- [ ] Integrate Google Analytics.
+- [ ] Enable Google Cloud Endpoints API management.
+- [ ] Implement memcache
+- [ ] Implement Email - Mailjet/SendGrid
+- [ ] Implement SMS - Twillo
+- [ ] Write Unit Test
+- [ ] Web Push Notifications - Firebase Cloud Messaging
+- [ ] Real-time collaboration - NodeJS/Erlang
+- [ ] Enable server-side cashing - Redis
+- [ ] Debug on remote
