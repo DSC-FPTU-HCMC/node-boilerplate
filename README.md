@@ -1,3 +1,5 @@
+![DSC FPTU HCMC](/assets/images/dsc-fptu-hcmc/DSC_FPT_University_HCMC_Horizontal_Logo.png)
+
 # BOOK TIME AVAILABLE
 Book and share your available time with your friends.
 
@@ -170,3 +172,5 @@ sequelize seed:generate                     Generates a new seed file           
 - [ ] Real-time collaboration - NodeJS/Erlang
 - [ ] Enable server-side cashing - Redis
 - [ ] Debug on remote
+
+![DSC FPTU HCMC](/assets/images/dsc-fptu-hcmc/HOME_PAGE_BANNERS.png)
